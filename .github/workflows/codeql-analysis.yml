@@ -49,7 +49,7 @@ jobs:
         
     # Upload database as an artifact for teaching purposes
     - name: Upload CodeQL database
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: codeql-database-${{matrix.language}}
         path: /home/runner/work/_temp/codeql_databases
