@@ -104,12 +104,6 @@ dist
 .temp
 .cache
 
-# vitepress build output
-**/.vitepress/dist
-
-# vitepress cache directory
-**/.vitepress/cache
-
 # Docusaurus cache and generated files
 .docusaurus
 
@@ -134,3 +128,23 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# CodeQL database
+/codeql-dbs/
+
+# SARIF reports
+*.sarif
+
+# JetBrains IDEs
+.idea/
+
+# Visual Studio Code settings
+.vscode/
+
+# Mac OS files
+.DS_Store
+
+# Windows files
+Thumbs.db
+ehthumbs.db
+Desktop.ini 

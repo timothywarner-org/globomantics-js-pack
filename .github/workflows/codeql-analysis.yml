@@ -1,0 +1,56 @@
+name: "CodeQL Analysis"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * 0'  # Run once a week on Sunday at midnight
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      # Required for all workflows
+      security-events: write
+      # Only needed for upload-artifact and download-artifact actions
+      contents: read
+      actions: read
+      
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript' ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      
+    # Initializes the CodeQL tools for scanning
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+        queries: +./queries
+        
+    # Autobuild attempts to build any compiled languages (C/C++, C#, or Java)
+    # For JavaScript analysis, this step is not needed
+    # - name: Autobuild
+    #  uses: github/codeql-action/autobuild@v2
+      
+    # Run analysis with our custom queries and the standard library
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        category: "/language:${{matrix.language}}"
+        
+    # Upload database as an artifact for teaching purposes
+    - name: Upload CodeQL database
+      uses: actions/upload-artifact@v3
+      with:
+        name: codeql-database-${{matrix.language}}
+        path: /home/runner/work/_temp/codeql_databases
+        retention-days: 7 

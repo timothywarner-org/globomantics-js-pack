@@ -1,0 +1,28 @@
+# Globomantics JavaScript Security Suite
+# A collection of security queries for JavaScript applications
+#
+
+- import: codeql-suites/javascript-security-extended.qls
+  from: codeql-javascript
+
+# Globomantics custom security queries
+- queries: .
+  from: globomantics/javascript-security-queries
+
+# Dangerous function use
+- description: Detecting dangerous function usage
+- include:
+    id:
+      - js/eval-use
+
+# Injection vulnerabilities
+- description: Detecting injection vulnerabilities
+- include:
+    id:
+      - js/http-header-injection
+
+# Cryptographic issues
+- description: Detecting cryptographic weaknesses
+- include:
+    id:
+      - js/insecure-randomness 
