@@ -41,6 +41,19 @@ jobs:
     # - name: Autobuild
     #  uses: github/codeql-action/autobuild@v2
       
+    # Debugging steps to validate paths, environment variables, and CodeQL configuration
+    - name: Debug Environment
+      run: |
+        echo "Source Root: /home/runner/work/globomantics-js-pack/globomantics-js-pack"
+        echo "Database Cluster Path: /home/runner/work/_temp/codeql_databases"
+        ls -la /home/runner/work/_temp/codeql_databases
+        ls -la /home/runner/work/globomantics-js-pack/globomantics-js-pack
+        cat /home/runner/work/_temp/user-config.yaml
+
+    - name: Validate CodeQL Configuration
+      run: |
+        /opt/hostedtoolcache/CodeQL/2.21.2/x64/codeql/codeql resolve library-path --language=javascript --codescanning-config=/home/runner/work/_temp/user-config.yaml
+
     # Run analysis with our custom queries and the standard library
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
