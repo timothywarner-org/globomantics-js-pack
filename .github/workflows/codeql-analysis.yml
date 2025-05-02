@@ -29,41 +29,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       
-    # Initializes the CodeQL tools for scanning
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
-        languages: ${{ matrix.language }}
-        queries: +./queries
-        
-    # Autobuild attempts to build any compiled languages (C/C++, C#, or Java)
-    # For JavaScript analysis, this step is not needed
-    # - name: Autobuild
-    #  uses: github/codeql-action/autobuild@v2
-      
-    # Debugging steps to validate paths, environment variables, and CodeQL configuration
-    - name: Debug Environment
-      run: |
-        echo "Source Root: /home/runner/work/globomantics-js-pack/globomantics-js-pack"
-        echo "Database Cluster Path: /home/runner/work/_temp/codeql_databases"
-        ls -la /home/runner/work/_temp/codeql_databases
-        ls -la /home/runner/work/globomantics-js-pack/globomantics-js-pack
-        cat /home/runner/work/_temp/user-config.yaml
+        languages: javascript
 
-    - name: Validate CodeQL Configuration
-      run: |
-        /opt/hostedtoolcache/CodeQL/2.21.2/x64/codeql/codeql resolve library-path --language=javascript --codescanning-config=/home/runner/work/_temp/user-config.yaml
-
-    # Run analysis with our custom queries and the standard library
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:${{matrix.language}}"
-        
-    # Upload database as an artifact for teaching purposes
+
     - name: Upload CodeQL database
       uses: actions/upload-artifact@v4
       with:
-        name: codeql-database-${{matrix.language}}
+        name: codeql-database
         path: /home/runner/work/_temp/codeql_databases
-        retention-days: 7
