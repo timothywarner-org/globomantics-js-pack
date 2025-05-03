@@ -1,6 +1,6 @@
 # Globomantics JavaScript Security Query Pack
 
-A comprehensive CodeQL learning package for identifying security vulnerabilities in JavaScript applications. This repository is designed for educational purposes as part of the Pluralsight GHAS CodeQL training class.
+A comprehensive CodeQL learning package for identifying security vulnerabilities in JavaScript applications. This repository is designed for educational purposes as part of Tim Warner's Pluralsight GHAS CodeQL training class.
 
 ## Repository Structure
 
